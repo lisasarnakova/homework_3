@@ -43,67 +43,67 @@ getCoupeNumber(7.7)  => "Ошибка. Проверьте правильност
 getCoupeNumber(-10)  => "Ошибка. Проверьте правильность введенного номера места"
 getCoupeNumber('Hello')  => "Ошибка. Проверьте правильность введенного номера места"*/
 
-function getCoupeNumber(seatNumber) {
-    if (!Number.isInteger(seatNumber) || seatNumber < 0){
-        return 'Ошибка. Проверьте правильность введенного номера места'
+function getCoupeNumber(seatNumber) { // создаем функцию
+    if (!Number.isInteger(seatNumber) || seatNumber < 0){ // проверяем, является ли переданное значение номера места не целым числом (критерии "не число" и  "дробное") или отрицательным числом
+        return 'Ошибка. Проверьте правильность введенного номера места' // возвращаем сообщение об ошибке
     } 
-    else if (seatNumber <= 0 || seatNumber > 36){
-        return 'Таких мест в вагоне не существует'
+    else if (seatNumber === 0 || seatNumber > 36){ // проверяем, если переданное значение задает несуществующее место
+        return 'Таких мест в вагоне не существует' // возвращаем сообщение
     }
     else {
-        const coupeNumber = Math.ceil(seatNumber / 4)
+        const coupeNumber = Math.ceil(seatNumber / 4) // во всех остальных случаях производим вычисления и округляем число вверх
         return coupeNumber
     }
 }
-console.log(getCoupeNumber(33))  
+console.log(getCoupeNumber(33))  // задаем значение номера места и выводим результат в консоль
 
 /*3) Измените данный массив так, чтобы все числа были увеличены в 2 раза, а если попадается строка строка - то к ней было добавлено " - done".
 Для определения типа данных используйте typeof();
 Должно получиться: [ 10, 20, 'Shopping - done', 40, 'Homework - done' ]*/
 
-const originalArray = [5, 10, 'Shopping', 20, 'Homework']
+const array = [5, 10, 'Shopping', 20, 'Homework'] // задаем массив, с которым будем работать
 
-const modifiedArray = originalArray.map(item => {
-    if (typeof item === 'number') {
-        return item * 2
+const newArray = array.map(item => { //создам newArray, который будет содержать новый массив после преобразования элементов исходного массива с помощью метода map.
+    if (typeof item === 'number') { // проверяем условие, является ли элемент массива числом
+        return item * 2 // если число - умножаем на 2
     }
-    else if (typeof item === 'string') {
-        return item + ' - done'
+    else if (typeof item === 'string') { // проверяем условие, является ли элемент массива строкой
+        return item + ' - done' // добавляем ' - done' к строке
     }
 })
 
-console.log(modifiedArray)
+console.log(newArray) // выводим новый массив в консоль
 
 /*4) Разверните массив data наоборот при помощи цикла и запишите данные в массив result.
 Должно получиться: [ 'Homework', 20, 'Shopping', 10, 5 ]
 ВАЖНО: нельзя использовать функцию reverse у массива*/
 
-const data = [5, 10, 'Shopping', 20, 'Homework']
-const result = []
+const data = [5, 10, 'Shopping', 20, 'Homework'] // задаем массив data
+const result = [] // создаем пустой массив, в который будем добавлять элементы с конца исходного массива
 
-for (let i = data.length - 1; i >= 0; i--) {
+for (let i = data.length - 1; i >= 0; i--) { // проходим массив с конца и добавляем каждый элемент в пустой массив
     result.push(data[i])
 }
 
-console.log(result)
+console.log(result) // выводим результат в консоль
 
 /*5) Напишите функцию showFamily, которая будет принимать в себя массив строк и возвращать сообщение в нужном формате.
 showFamily(family)  => 'Семья состоит из: Peter Ann Alex Linda'
 Имена подставляются автоматически из массива. Если массив пустой, то выводится сообщение 'Семья пуста'*/
 
-function showFamily(family) {
-    if (family.length === 0) {
-        return 'Семья пуста'
+function showFamily(family) { // создаем функцию
+    if (family.length === 0) { // првоеряем условие, есть ли в массиве какие-то значения
+        return 'Семья пуста' // если массив пустой, выводим сообщение
     } 
-    else {
-        const message = 'Семья состоит из: ' + family.join(' ')
+    else { // в других случаях выводим сообщение, из каких людей состоит семья
+        const message = 'Семья состоит из: ' + family.join(' ') // используем .join(' ') для пробела между именами
         return message
     }
 }
-const family1 = ['Аня', 'Костя', 'Люба', 'Маша']
+const family1 = ['Аня', 'Костя', 'Люба', 'Маша'] // проверяем с полным массивом
 console.log(showFamily(family1))
   
-const family2 = []
+const family2 = [] // првоеряем с пустым массивом
 console.log(showFamily(family2))
   
 
@@ -196,14 +196,14 @@ transferWaitors(restorantData)
 (Подсказка: в конце фигуры есть перенос строки \n, который тоже учитывается в тестах. 
     В КОНЦЕ КАЖДОЙ СТРОКИ НЕТ ПРОБЕЛОВ, ТОЛЬКО ПЕРЕНОС - это будет проверяться)
 */
-const numberOfRows = 6
-for (let i = 1; i <= numberOfRows; i++) {
-    let spaces = ' '.repeat(6 - i)
-    let stars = '*'.repeat(2 * i - 1)
-    if (i === numberOfRows) {
+const numberOfRows = 6 // задаем количество строк, которые должны содержать звездочки
+for (let i = 1; i <= numberOfRows; i++) { // пока i меньше заданного количества строк, добавляем +1 к i - перечисляем строки
+    let spaces = ' '.repeat(6 - i) // задаем количество пробелов перед первой звездочкой в строке
+    let stars = '*'.repeat(2 * i - 1) // задаем количество звездочек
+    if (i === numberOfRows) { // задаем перенос строки после последней строчки (по условию)
         console.log(spaces + stars + '\n')
     }
-    else {
+    else { // выводим звездочки для каждой строчки
         console.log(spaces + stars)
     }
 }
